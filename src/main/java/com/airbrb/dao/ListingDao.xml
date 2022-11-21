@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.airbrb.dao" >
+    <resultMap id="BaseListingMap" type="Listing">
+        <id property="id" column="id"/>
+        <result property="title" column="title"/>
+        <result property="owner" column="owner"/>
+        <result property="price" column="price"/>
+        <result property="published" column="published"/>
+        <result property="postedOn" column="postedOn"/>
+        <result property="thumbnail" column="thumbnail"/>
+        <association property="address" javaType="Address">
+            <id property="id" column="id"/>
+            <result property="street" column="street"/>
+            <result property="city" column="city"/>
+            <result property="state" column="state"/>
+            <result property="postcode" column="postcode"/>
+            <result property="country" column="country"/>
+        </association>
+    </resultMap>
+
+    <select id="getAll" resultType="BaseListingMap">
+        SELECT * FROM Listings as l inner join Address as a On l.id = a.id
+    </select>
+</mapper>
